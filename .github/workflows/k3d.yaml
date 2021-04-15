@@ -58,4 +58,5 @@ jobs:
         run: docker logs k3d-k3s-default-serverlb
 
       - name: docker ps
-        run: docker ps
+        run: docker ps -a
+
