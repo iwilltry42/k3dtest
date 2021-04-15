@@ -22,10 +22,10 @@ jobs:
           chmod +x $HOME/.local/bin/k3d
 
       - name: k3d
-        run: k3d --help
+        run: k3d --version
 
       - name: run cluster
         run: k3d cluster create --servers=3 --subnet=auto
 
       - name: restart docker
-        run: systemctl stop docker && systemctl start docker
+        run: sudo systemctl stop docker && sudo systemctl start docker
