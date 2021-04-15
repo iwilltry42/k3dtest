@@ -27,9 +27,35 @@ jobs:
       - name: run cluster
         run: k3d cluster create --servers=3 --subnet=auto
 
-      - name: restart docker
+      - name: docker ps
+        run: docker ps -a
+#
+#      - name: sleep 20
+#        run: sleep 20
+
+      - name: stop docker
         run: sudo systemctl stop docker && sudo systemctl start docker
 
       - name: docker ps
-        run: sleep 15 && docker ps -q | xargs -n1 docker logs && docker ps
+        run: docker ps -a | true
 
+      - name: start docker
+        run: sudo systemctl start docker
+#
+#      - name: sleep 120
+#        run: sleep 120
+
+      - name: docker logs s0
+        run: docker logs k3d-k3s-default-server-0
+
+      - name: docker logs s1
+        run: docker logs k3d-k3s-default-server-1
+
+      - name: docker logs s2
+        run: docker logs k3d-k3s-default-server-2
+
+      - name: docker logs lb
+        run: docker logs k3d-k3s-default-serverlb
+
+      - name: docker ps
+        run: docker ps
