@@ -31,5 +31,5 @@ jobs:
         run: sudo systemctl stop docker && sudo systemctl start docker
 
       - name: docker ps
-        run: sleep 15 && docker ps -q | xargs docker logs && docker ps
+        run: sleep 15 && docker ps -q | xargs -n1 docker logs && docker ps
 
