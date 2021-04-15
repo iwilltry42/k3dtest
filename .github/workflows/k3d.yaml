@@ -20,6 +20,9 @@ jobs:
           curl -L https://github.com/rancher/k3d/releases/download/v4.5.0-dev.1/k3d-linux-amd64 --output k3d-linux-amd64
           mv k3d-linux-amd64 $HOME/.local/bin/k3d
           chmod +x $HOME/.local/bin/k3d
+          curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+          chmod +x ./kubectl
+          mv ./kubectl /usr/local/bin/kubectl
 
       - name: k3d
         run: k3d --version
@@ -29,9 +32,12 @@ jobs:
 
       - name: docker ps
         run: docker ps -a
-#
-#      - name: sleep 20
-#        run: sleep 20
+
+      - name: sleep 20
+        run: sleep 20
+
+      - name: kubectl get nodes
+        run: kubectl get nodes -o wide
 
       - name: stop docker
         run: sudo systemctl stop docker
@@ -44,6 +50,12 @@ jobs:
 
       - name: sleep 60
         run: sleep 60
+
+      - name: docker ps
+        run: docker ps -a
+
+      - name: kubectl get nodes
+        run: kubectl get nodes -o wide
 
       - name: docker logs s0
         run: docker logs k3d-k3s-default-server-0
