@@ -34,7 +34,7 @@ jobs:
 #        run: sleep 20
 
       - name: stop docker
-        run: sudo systemctl stop docker && sudo systemctl start docker
+        run: sudo systemctl stop docker
 
       - name: docker ps
         run: docker ps -a | true
