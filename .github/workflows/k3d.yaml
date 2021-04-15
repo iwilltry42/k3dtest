@@ -29,3 +29,6 @@ jobs:
 
       - name: restart docker
         run: sudo systemctl stop docker && sudo systemctl start docker
+
+      - name: docker ps
+        run: docker ps
